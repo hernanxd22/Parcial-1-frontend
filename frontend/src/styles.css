@@ -1,0 +1,275 @@
+/* src/styles.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Sora', sans-serif;
+  background: #f1f5f9;
+  min-height: 100vh;
+}
+
+/* ── Layout ── */
+.page-root {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* ── Header oscuro ── */
+.header-card {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 1rem;
+}
+.header-card .logo {
+  width: 44px; height: 44px;
+  background: rgba(99,102,241,0.25);
+  border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.header-card .title { font-size: 22px; font-weight: 600; color: #f8fafc; }
+.header-card .sub   { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+
+/* ── Avatar (MenuPage) ── */
+.header-top { display: flex; align-items: center; gap: 14px; }
+.avatar {
+  width: 48px; height: 48px;
+  background: rgba(99,102,241,0.25);
+  border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; font-weight: 600; color: #a5b4fc;
+  flex-shrink: 0;
+}
+.user-name  { font-size: 18px; font-weight: 600; color: #f8fafc; }
+.role-badge {
+  display: inline-flex; align-items: center;
+  margin-top: 6px;
+  background: rgba(99,102,241,0.2);
+  border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 12px; color: #a5b4fc; font-weight: 500; letter-spacing: 0.05em;
+}
+
+/* ── Botones del header ── */
+.header-actions { display: flex; gap: 8px; }
+.btn-back {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px; color: #94a3b8;
+  font-family: inherit; font-size: 13px;
+  padding: 7px 14px; cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-back:hover { background: rgba(255,255,255,0.06); color: #f8fafc; }
+
+.btn-add {
+  background: rgba(99,102,241,0.2);
+  border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc;
+  font-family: inherit; font-size: 13px;
+  padding: 7px 14px; cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-add:hover { background: rgba(99,102,241,0.35); }
+
+.btn-logout {
+  margin-top: 1.25rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; color: #94a3b8;
+  font-family: inherit; font-size: 13px;
+  padding: 8px 16px; cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-logout:hover { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.3); color: #fca5a5; }
+
+/* ── White card ── */
+.form-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 0.5px solid #e2e8f0;
+  padding: 1.75rem;
+}
+
+/* ── Inputs ── */
+.field { margin-bottom: 1rem; }
+.field label {
+  display: block;
+  font-size: 12px; font-weight: 600;
+  color: #64748b; letter-spacing: 0.06em;
+  text-transform: uppercase; margin-bottom: 6px;
+}
+.field input[type=text],
+.field input[type=password] {
+  width: 100%; padding: 10px 14px;
+  border-radius: 10px; border: 0.5px solid #e2e8f0;
+  font-family: inherit; font-size: 14px; color: #1e293b;
+  background: #f8fafc; outline: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.field input:focus { border-color: #818cf8; background: #fff; }
+
+/* ── Botones principales ── */
+.btn-primary {
+  width: 100%; padding: 11px;
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #fff; border: none; border-radius: 10px;
+  font-family: inherit; font-size: 14px; font-weight: 600;
+  cursor: pointer; margin-top: 8px;
+  transition: opacity 0.15s;
+}
+.btn-primary:hover { opacity: 0.88; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn-ghost {
+  width: 100%; padding: 11px;
+  background: transparent; color: #6366f1;
+  border: 0.5px solid #c7d2fe; border-radius: 10px;
+  font-family: inherit; font-size: 14px; font-weight: 500;
+  cursor: pointer; margin-top: 12px;
+  transition: background 0.15s;
+}
+.btn-ghost:hover { background: #eef2ff; }
+
+/* ── Divider ── */
+.divider {
+  text-align: center; font-size: 12px; color: #94a3b8;
+  margin: 1rem 0; position: relative;
+}
+.divider::before {
+  content: ''; position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 0.5px; background: #e2e8f0;
+}
+.divider span { background: #fff; position: relative; padding: 0 8px; }
+
+/* ── Mensaje de feedback ── */
+.msg { margin-top: 12px; font-size: 13px; color: #6366f1; text-align: center; }
+.msg.error { color: #dc2626; }
+
+/* ── Section title (MenuPage) ── */
+.section-title {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  color: #6b7280; text-transform: uppercase;
+  margin: 1.5rem 0 0.75rem; padding-left: 4px;
+}
+
+/* ── Action list (MenuPage) ── */
+.action-card {
+  background: #fff;
+  border: 0.5px solid rgba(0,0,0,0.08);
+  border-radius: 12px; overflow: hidden;
+}
+.action-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 1rem 1.25rem; cursor: pointer;
+  border: none; background: transparent; width: 100%;
+  border-bottom: 0.5px solid rgba(0,0,0,0.06);
+  transition: background 0.15s;
+  font-family: inherit;
+}
+.action-btn:last-child { border-bottom: none; }
+.action-btn:hover { background: #f8fafc; }
+.action-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.btn-label { font-size: 14px; font-weight: 500; color: #111827; }
+.btn-sub   { font-size: 12px; color: #6b7280; margin-top: 2px; }
+.chevron   { margin-left: auto; color: #9ca3af; font-size: 18px; }
+
+/* ── Info card (MenuPage) ── */
+.info-card {
+  background: #f9fafb; border-radius: 12px;
+  padding: 1rem 1.25rem; margin-top: 1rem;
+  border: 0.5px solid rgba(0,0,0,0.08);
+}
+.info-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
+.info-row:last-child { margin-bottom: 0; }
+.info-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+.info-text { font-size: 13px; color: #6b7280; line-height: 1.5; }
+
+/* ── Ingredientes list ── */
+.list-card {
+  background: #fff; border-radius: 12px;
+  border: 0.5px solid #e2e8f0; overflow: hidden;
+}
+.ing-row {
+  display: flex; align-items: center;
+  padding: 1rem 1.25rem; gap: 12px;
+  border-bottom: 0.5px solid #f1f5f9;
+}
+.ing-row:last-child { border-bottom: none; }
+.ing-icon {
+  width: 38px; height: 38px; background: #eef2ff;
+  border-radius: 8px; display: flex; align-items: center;
+  justify-content: center; font-size: 18px; flex-shrink: 0;
+}
+.ing-name { font-size: 14px; font-weight: 500; color: #1e293b; }
+.ing-desc { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+.row-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+.badge {
+  padding: 2px 8px; border-radius: 20px;
+  font-size: 11px; font-weight: 500;
+}
+.badge-red  { background: #fef2f2; color: #dc2626; border: 0.5px solid #fecaca; }
+.badge-green{ background: #f0fdf4; color: #16a34a; border: 0.5px solid #bbf7d0; }
+
+.btn-edit {
+  padding: 5px 12px; border-radius: 7px;
+  border: 0.5px solid #e2e8f0; background: transparent;
+  font-family: inherit; font-size: 12px; color: #6366f1; cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-edit:hover { background: #eef2ff; }
+
+.btn-del {
+  padding: 5px 12px; border-radius: 7px;
+  border: 0.5px solid #fecaca; background: transparent;
+  font-family: inherit; font-size: 12px; color: #dc2626; cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-del:hover { background: #fef2f2; }
+
+/* ── Edit card ── */
+.edit-card {
+  background: #fff; border-radius: 16px;
+  border: 0.5px solid #e2e8f0;
+  padding: 1.5rem; margin-top: 1rem;
+}
+.edit-title { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 16px; }
+.edit-actions { display: flex; gap: 8px; margin-top: 8px; }
+.edit-actions .btn-primary,
+.edit-actions .btn-ghost { margin: 0; }
+
+/* ── Checkbox row ── */
+.check-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px; background: #f8fafc;
+  border-radius: 10px; border: 0.5px solid #e2e8f0;
+  cursor: pointer; transition: background 0.15s;
+}
+.check-row:hover { background: #f1f5f9; }
+.check-box {
+  width: 18px; height: 18px; border-radius: 5px;
+  border: 2px solid #c7d2fe; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.15s;
+}
+.check-box.checked { background: #6366f1; border-color: #6366f1; }
+.check-label { font-size: 14px; color: #374151; }
+
+/* ── Empty state ── */
+.empty {
+  padding: 2rem; text-align: center;
+  color: #94a3b8; font-size: 14px;
+}
