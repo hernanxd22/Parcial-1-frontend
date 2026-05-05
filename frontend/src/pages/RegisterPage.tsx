@@ -46,6 +46,7 @@ export default function RegisterPage() {
         <button className="btn-primary" onClick={handleSubmit}>Registrarse</button>
         <div className="divider"><span>o</span></div>
         <button className="btn-ghost" onClick={() => navigate("/login")}>Ya tengo cuenta</button>
+        <button className="btn-ghost" onClick={() => navigate("/")}>Volver a la página principal</button>
         {msg && <p className="msg">{msg}</p>}
       </div>
     </div>

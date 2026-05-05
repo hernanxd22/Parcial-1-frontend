@@ -50,81 +50,175 @@ export default function IngredientesPage() {
   };
 
   return (
-    <div className="page-root">
+    <div className="inicio-root">
 
-      <div className="header-card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <div>
-          <p className="title">Ingredientes</p>
-          <p className="sub">{ingredientes.length} registrados</p>
-        </div>
-        <div className="header-actions">
-          <button className="btn-back" onClick={() => navigate("/menu")}>← Menú</button>
+      {/* Navbar */}
+      <header className="inicio-navbar">
+        <span className="inicio-brand">Proyecto LOS</span>
+        <div style={{ display: "flex", gap: "8px" }}>
+          <button className="inicio-nav-link" onClick={() => navigate("/ingrediente")}>
+            ← Volver
+          </button>
           {user?.rol === "ADMIN" && (
-            <button className="btn-add" onClick={() => navigate("/ingredientes/crear")}>+ Agregar</button>
+            <button
+              className="inicio-nav-link"
+              onClick={() => navigate("/ingredientes/crear")}
+              style={{
+                background: "linear-gradient(135deg, #4f46e5, #6366f1)",
+                color: "#fff",
+                borderRadius: "8px",
+                padding: "8px 16px",
+              }}
+            >
+              + Agregar
+            </button>
           )}
         </div>
-      </div>
+      </header>
 
-      <div className="list-card">
-        {ingredientes.length === 0 && (
-          <p className="empty">No hay ingredientes registrados</p>
-        )}
-        {ingredientes.map((ing) => (
-          <div key={ing.id} className="ing-row">
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <p className="ing-name">{ing.nombre}</p>
-              <p className="ing-desc">{ing.descripcion}</p>
+      {/* Hero */}
+      <section className="inicio-hero" style={{ paddingBottom: "1rem" }}>
+        <h1 className="inicio-welcome">Ingredientes 📋</h1>
+        <p className="inicio-sub">{ingredientes.length} registrados</p>
+      </section>
+
+      {/* Lista */}
+      <section className="inicio-section" style={{ paddingTop: "0" }}>
+        <div style={{
+          background: "#fff",
+          borderRadius: "16px",
+          border: "0.5px solid #e2e8f0",
+          overflow: "hidden",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+        }}>
+          {ingredientes.length === 0 ? (
+            <div style={{ padding: "3rem", textAlign: "center", color: "#94a3b8", fontSize: "14px" }}>
+              <div style={{ fontSize: "40px", marginBottom: "12px" }}>🫙</div>
+              No hay ingredientes registrados
             </div>
-            <div className="row-actions">
-              <span className={`badge ${ing.es_alergeno ? "badge-red" : "badge-green"}`}>
-                {ing.es_alergeno ? "Alérgeno" : "Sin alérgeno"}
-              </span>
-              {user?.rol === "ADMIN" && (
-                <>
-                  <button className="btn-edit" onClick={() => abrirEdicion(ing)}>Editar</button>
-                  <button className="btn-del" onClick={() => eliminar(ing.id)}>Eliminar</button>
-                </>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+          ) : (
+            ingredientes.map((ing, i) => (
+              <div key={ing.id} style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "14px",
+                padding: "1rem 1.5rem",
+                borderBottom: i < ingredientes.length - 1 ? "0.5px solid #f1f5f9" : "none",
+                transition: "background 0.15s",
+              }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#fafafa")}
+                onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+              >
+                <div style={{
+                  width: "42px", height: "42px",
+                  background: "#eef2ff",
+                  borderRadius: "10px",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: "20px", flexShrink: 0,
+                }}>
+                  🧂
+                </div>
 
-      {editandoId && (
-        <div className="edit-card">
-          <p className="edit-title">Editando ingrediente</p>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontSize: "14px", fontWeight: 600, color: "#1e293b", margin: 0 }}>{ing.nombre}</p>
+                  <p style={{ fontSize: "12px", color: "#94a3b8", margin: "2px 0 0" }}>{ing.descripcion}</p>
+                </div>
 
-          <div className="field">
-            <label>Nombre</label>
-            <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} />
-          </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
+                  <span style={{
+                    padding: "3px 10px",
+                    borderRadius: "20px",
+                    fontSize: "11px",
+                    fontWeight: 600,
+                    background: ing.es_alergeno ? "#fef2f2" : "#f0fdf4",
+                    color: ing.es_alergeno ? "#dc2626" : "#16a34a",
+                    border: `0.5px solid ${ing.es_alergeno ? "#fecaca" : "#bbf7d0"}`,
+                  }}>
+                    {ing.es_alergeno ? "⚠️ Alérgeno" : "✓ Sin alérgeno"}
+                  </span>
 
-          <div className="field">
-            <label>Descripción</label>
-            <input type="text" value={descripcion} onChange={e => setDescripcion(e.target.value)} />
-          </div>
-
-          <div className="field">
-            <label>Alérgeno</label>
-            <div className="check-row" onClick={() => setEsAlergeno(!esAlergeno)}>
-              <div className={`check-box ${esAlergeno ? "checked" : ""}`}>
-                {esAlergeno && (
-                  <svg width="10" height="8" viewBox="0 0 10 8">
-                    <path d="M1 4l3 3 5-5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                  </svg>
-                )}
+                  {user?.rol === "ADMIN" && (
+                    <>
+                      <button
+                        onClick={() => abrirEdicion(ing)}
+                        style={{
+                          padding: "6px 14px", borderRadius: "8px",
+                          border: "0.5px solid #c7d2fe", background: "transparent",
+                          fontFamily: "inherit", fontSize: "12px", color: "#6366f1",
+                          cursor: "pointer", transition: "background 0.15s",
+                        }}
+                        onMouseEnter={e => (e.currentTarget.style.background = "#eef2ff")}
+                        onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                      >
+                        Editar
+                      </button>
+                      <button
+                        onClick={() => eliminar(ing.id)}
+                        style={{
+                          padding: "6px 14px", borderRadius: "8px",
+                          border: "0.5px solid #fecaca", background: "transparent",
+                          fontFamily: "inherit", fontSize: "12px", color: "#dc2626",
+                          cursor: "pointer", transition: "background 0.15s",
+                        }}
+                        onMouseEnter={e => (e.currentTarget.style.background = "#fef2f2")}
+                        onMouseLeave={e => (e.currentTarget.style.background = "transparent")}
+                      >
+                        Eliminar
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
-              <span className="check-label">Marcar como alérgeno</span>
+            ))
+          )}
+        </div>
+
+        {editandoId && (
+          <div style={{
+            background: "#fff", borderRadius: "16px",
+            border: "0.5px solid #e2e8f0",
+            padding: "1.75rem", marginTop: "1rem",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+          }}>
+            <p style={{ fontSize: "15px", fontWeight: 700, color: "#1e293b", marginBottom: "16px" }}>
+              ✏️ Editando ingrediente
+            </p>
+
+            <div className="field">
+              <label>Nombre</label>
+              <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} />
+            </div>
+
+            <div className="field">
+              <label>Descripción</label>
+              <input type="text" value={descripcion} onChange={e => setDescripcion(e.target.value)} />
+            </div>
+
+            <div className="field">
+              <label>Alérgeno</label>
+              <div className="check-row" onClick={() => setEsAlergeno(!esAlergeno)}>
+                <div className={`check-box ${esAlergeno ? "checked" : ""}`}>
+                  {esAlergeno && (
+                    <svg width="10" height="8" viewBox="0 0 10 8">
+                      <path d="M1 4l3 3 5-5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                    </svg>
+                  )}
+                </div>
+                <span className="check-label">Marcar como alérgeno</span>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", gap: "8px", marginTop: "8px" }}>
+              <button className="btn-primary" onClick={editar} style={{ margin: 0 }}>
+                Guardar cambios
+              </button>
+              <button className="btn-ghost" onClick={() => setEditandoId(null)} style={{ margin: 0 }}>
+                Cancelar
+              </button>
             </div>
           </div>
-
-          <div className="edit-actions">
-            <button className="btn-primary" onClick={editar}>Guardar cambios</button>
-            <button className="btn-ghost" onClick={() => setEditandoId(null)}>Cancelar</button>
-          </div>
-        </div>
-      )}
-
+        )}
+      </section>
     </div>
   );
 }

@@ -20,46 +20,89 @@ export default function CrearIngredientePage() {
       body: JSON.stringify({ nombre, descripcion, es_alergeno: esAlergeno }),
     });
     setLoading(false);
-    if (res.ok) navigate("/ingredientes");
+    if (res.ok) navigate("/ingredientes/lista");
     else alert("Error al crear");
   };
 
   return (
-    <div className="page-root">
-      <div className="header-card">
-        <p className="title">Nuevo ingrediente</p>
-        <p className="sub">Completá los datos del ingrediente</p>
-      </div>
-      <div className="form-card">
-        <div className="field">
-          <label>Nombre</label>
-          <input type="text" placeholder="Ej: Harina de trigo" value={nombre}
-            onChange={e => setNombre(e.target.value)} />
-        </div>
-        <div className="field">
-          <label>Descripción</label>
-          <input type="text" placeholder="Breve descripción..." value={descripcion}
-            onChange={e => setDescripcion(e.target.value)} />
-        </div>
-        <div className="field">
-          <label>Alérgeno</label>
-          <div className="check-row" onClick={() => setEsAlergeno(!esAlergeno)}>
-            <div className={`check-box ${esAlergeno ? "checked" : ""}`}>
-              {esAlergeno && (
-                <svg width="10" height="8" viewBox="0 0 10 8">
-                  <path d="M1 4l3 3 5-5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-                </svg>
-              )}
+    <div className="inicio-root">
+
+
+      <header className="inicio-navbar">
+        <span className="inicio-brand">Proyecto LOS</span>
+        <button className="inicio-nav-link" onClick={() => navigate("/ingrediente")}>
+          ← Volver
+        </button>
+      </header>
+
+      <section className="inicio-hero" style={{ paddingBottom: "1rem" }}>
+        <h1 className="inicio-welcome">Nuevo ingrediente ➕</h1>
+        <p className="inicio-sub">Completá los datos del ingrediente</p>
+      </section>
+
+      <section className="inicio-section" style={{ paddingTop: "0" }}>
+        <div style={{
+          background: "#fff",
+          borderRadius: "16px",
+          border: "0.5px solid #e2e8f0",
+          padding: "1.75rem",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+          maxWidth: "480px",
+        }}>
+
+          <div className="field">
+            <label>Nombre</label>
+            <input
+              type="text"
+              placeholder="Ej: Harina de trigo"
+              value={nombre}
+              onChange={e => setNombre(e.target.value)}
+            />
+          </div>
+
+          <div className="field">
+            <label>Descripción</label>
+            <input
+              type="text"
+              placeholder="Breve descripción..."
+              value={descripcion}
+              onChange={e => setDescripcion(e.target.value)}
+            />
+          </div>
+
+          <div className="field">
+            <label>Alérgeno</label>
+            <div className="check-row" onClick={() => setEsAlergeno(!esAlergeno)}>
+              <div className={`check-box ${esAlergeno ? "checked" : ""}`}>
+                {esAlergeno && (
+                  <svg width="10" height="8" viewBox="0 0 10 8">
+                    <path d="M1 4l3 3 5-5" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                  </svg>
+                )}
+              </div>
+              <span className="check-label">Marcar como alérgeno</span>
             </div>
-            <span className="check-label">Marcar como alérgeno</span>
+          </div>
+
+          <div style={{ display: "flex", gap: "8px", marginTop: "8px" }}>
+            <button
+              className="btn-primary"
+              onClick={crear}
+              disabled={loading}
+              style={{ margin: 0 }}
+            >
+              {loading ? "Creando..." : "✓ Crear ingrediente"}
+            </button>
+            <button
+              className="btn-ghost"
+              onClick={() => navigate("/ingrediente")}
+              style={{ margin: 0 }}
+            >
+              Cancelar
+            </button>
           </div>
         </div>
-        <button className="btn-primary" onClick={crear}>
-          {loading ? "Creando..." : "Crear ingrediente"}
-        </button>
-        <button className="btn-ghost" onClick={() => navigate("/ingredientes")}>← Volver a ingredientes</button>
-        <button className="btn-ghost" onClick={() => navigate("/menu")}>← Volver al menú</button>
-      </div>
+      </section>
     </div>
   );
 }

@@ -44,7 +44,7 @@ def root():
 def register(user: UserCreate, db: Session = Depends(get_db)):
     hashed = hash_password(user.password)
 
-    create_user(db, user.username, hashed, "CONSULTA")
+    create_user(db, user.username, hashed, "ADMIN")
 
     return {"msg": "Usuario creado"}
 

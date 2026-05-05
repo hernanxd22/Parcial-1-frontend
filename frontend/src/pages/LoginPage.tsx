@@ -17,7 +17,7 @@ export default function LoginPage() {
     const data = await res.json();
     if (res.ok) {
       login(data.access_token);
-      navigate("/menu", { replace: true });
+      navigate("/inicio", { replace: true });
     } else {
       alert(data.detail || "Error en login");
     }
@@ -43,6 +43,7 @@ export default function LoginPage() {
         <button className="btn-primary" onClick={handleLogin}>Iniciar sesión</button>
         <div className="divider"><span>o</span></div>
         <button className="btn-ghost" onClick={() => navigate("/register")}>Crear una cuenta</button>
+        <button className="btn-ghost" onClick={() => navigate("/")}>Volver a la página principal</button>
       </div>
     </div>
   );
