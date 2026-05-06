@@ -20,7 +20,7 @@ export default function MenuPage() {
             <span className="role-badge">● {user?.rol}</span>
           </div>
         </div>
-        <button className="btn-logout-inline" onClick={logout}>
+        <button className="btn-logout-inline" onClick={() => { logout(); navigate("/login", { replace: true }); }}>
           Cerrar sesión
         </button>
       </div>

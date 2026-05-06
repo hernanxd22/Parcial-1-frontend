@@ -151,7 +151,7 @@ export default function InicioPage() {
                 </div>
               </div>
               <hr className="dropdown-divider" />
-              <button className="dropdown-item danger" onClick={logout}>🚪 Cerrar sesión</button>
+              <button className="dropdown-item danger" onClick={() => { logout(); navigate("/login", { replace: true }); }}>🚪 Cerrar sesión</button>
             </div>
           )}
         </div>
